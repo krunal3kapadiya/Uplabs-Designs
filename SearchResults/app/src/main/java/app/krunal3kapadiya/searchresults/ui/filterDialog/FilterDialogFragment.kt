@@ -24,6 +24,8 @@ class FilterDialogFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        dialog?.window?.attributes?.windowAnimations = R.style.FilterDialogAnimation
+
         val spinnerList = ArrayList<String>()
         for (i in 0..10) {
             spinnerList.add("Keep Company")
