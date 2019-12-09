@@ -3,4 +3,8 @@
     <dimen name="edit_text_margin">8dp</dimen>
     <dimen name="recycler_view_margin">8dp</dimen>
     <dimen name="drawable_padding">8dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="filter_title_height">72dp</dimen>
+    <dimen name="filter_title_padding">16dp</dimen>
+    <dimen name="filter_dialog_padding">36dp</dimen>
 </resources>

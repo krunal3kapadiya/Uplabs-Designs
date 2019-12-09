@@ -2,4 +2,8 @@
     <string name="app_name">Search Results</string>
     <string name="search_brands">Search Brands</string>
     <string name="filter_results">Filter Results</string>
+    <string name="filter">FILTER</string>
+    <string name="reset">RESET</string>
+    <string name="size">Size</string>
+    <string name="price_range">Price Range</string>
 </resources>
