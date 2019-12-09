@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.MainActivity">
+
+    <View
+        android:id="@+id/filter_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:hint="@string/filter_results"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tablayout" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorGray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_search" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/filter_search"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="@dimen/edit_text_margin"
+        android:background="@android:color/white"
+        android:drawableStart="@drawable/ic_sort_gray_24dp"
+        android:drawablePadding="@dimen/drawable_padding"
+        android:hint="@string/filter_results"
+        android:padding="@dimen/edit_text_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tablayout" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_search"
+        app:tabBackground="@drawable/tab_background"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@color/colorSecondaryText" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/text_search"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="@dimen/edit_text_margin"
+        android:background="@android:color/white"
+        android:drawableStart="@drawable/ic_search_gray_24dp"
+        android:drawableEnd="@drawable/ic_keyboard_voice_gray_24dp"
+        android:drawablePadding="@dimen/drawable_padding"
+        android:hint="@string/search_brands"
+        android:maxLines="1"
+        android:padding="@dimen/edit_text_margin"
+        app:layout_constraintEnd_toEndOf="@+id/viewpager"
+        app:layout_constraintStart_toStartOf="@+id/viewpager"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

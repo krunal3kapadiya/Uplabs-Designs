@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Search Results</string>
+    <string name="search_brands">Search Brands</string>
+    <string name="filter_results">Filter Results</string>
+</resources>
