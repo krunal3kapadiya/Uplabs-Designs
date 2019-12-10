@@ -7,29 +7,30 @@
     android:background="@color/colorBackground"
     tools:context="app.krunal3kapadiya.smartclock.ui.stopwatch.StopWatchFragment">
 
-    <app.krunal3kapadiya.smartclock.widget.CircularTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/alarm_clock"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="337dp"
-        android:layout_marginBottom="266dp"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:background="@drawable/ic_round_drawable"
         android:gravity="center"
         android:text="@string/_00_00_00"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/_00_00_00" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/floating_button_margin"
-        android:saveEnabled="false"
-        android:src="@drawable/ic_smart_stopwatch"
+        android:background="@drawable/ic_round_drawable"
+        android:padding="@dimen/floating_button_padding"
+        android:saveEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_clock" />
+        app:srcCompat="@drawable/ic_smart_stopwatch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

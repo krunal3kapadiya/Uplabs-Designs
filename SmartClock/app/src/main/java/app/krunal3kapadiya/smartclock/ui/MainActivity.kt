@@ -1,10 +1,10 @@
 package app.krunal3kapadiya.smartclock.ui
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,13 +18,15 @@ import app.krunal3kapadiya.smartclock.ui.timer.TimerFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = ContextCompat.getColor(this,
+            window.statusBarColor = ContextCompat.getColor(
+                this,
                 R.color.colorAccent
             )
         }
@@ -46,34 +48,49 @@ class MainActivity : AppCompatActivity() {
 
         val tabAlarm =
             LayoutInflater.from(this).inflate(R.layout.image_tab, null) as AppCompatImageView
-        tabAlarm.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_alarm_gray_24dp
-        ))
+        tabAlarm.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.ic_tab_alarm_selector
+            )
+        )
 
         val tabClock =
             LayoutInflater.from(this).inflate(R.layout.image_tab, null) as AppCompatImageView
-        tabClock.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_alarm_gray_24dp
-        ))
+        tabClock.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.ic_tab_clock_selector
+            )
+        )
 
         val tabTimer =
             LayoutInflater.from(this).inflate(R.layout.image_tab, null) as AppCompatImageView
-        tabTimer.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_timer_gray_24dp
-        ))
+        tabTimer.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.ic_tab_timer_selector
+            )
+        )
 
         val tabStopWatch =
             LayoutInflater.from(this).inflate(R.layout.image_tab, null) as AppCompatImageView
-        tabStopWatch.setImageDrawable(ContextCompat.getDrawable(this,
-            R.drawable.ic_stop_watch_gray_24dp
-        ))
+        tabStopWatch.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.ic_tab_smart_watch_selector
+            )
+        )
 
         tab_view.getTabAt(0)?.customView = tabAlarm
         tab_view.getTabAt(1)?.customView = tabClock
         tab_view.getTabAt(2)?.customView = tabTimer
         tab_view.getTabAt(3)?.customView = tabStopWatch
-
         tab_view.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
+
+        val currentTab: TabLayout.Tab? = tab_view.getTabAt(0)
+        currentTab?.customView?.isSelected = true
+        currentTab?.select()
     }
 
     /**

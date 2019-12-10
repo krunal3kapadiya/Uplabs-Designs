@@ -31,8 +31,10 @@ class StopWatchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        alarm_clock.setStrokeWidth(1)
-        alarm_clock.setStrokeColor("#F06E6A")
-        alarm_clock.setSolidColor("#F06E6A")
+        floatingActionButton.setOnClickListener {
+            // TODO start timer here
+            floatingActionButton.isActivated = !floatingActionButton.isActivated
+        }
+
     }
 }

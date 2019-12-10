@@ -7,6 +7,15 @@
     android:background="@color/colorBackground"
     tools:context="app.krunal3kapadiya.smartclock.ui.alarm.AlarmFragment">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alarm_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/recycler_view_margin"
+        android:layout_marginEnd="@dimen/recycler_view_margin" />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
