@@ -26,19 +26,24 @@ class FilterDialogFragment : DialogFragment() {
         super.onActivityCreated(savedInstanceState)
         dialog?.window?.attributes?.windowAnimations = R.style.FilterDialogAnimation
 
-        val spinnerList = ArrayList<String>()
-        for (i in 0..10) {
-            spinnerList.add("Keep Company")
-            spinnerList.add("Mens / Size 8.5")
-        }
+        val size_one_list = ArrayList<String>()
+        val size_two_list = ArrayList<String>()
+        size_one_list.add("Keep Company")
+        size_two_list.add("Mens / Size 8.5")
 
-        val adapter: ArrayAdapter<String>? = context?.let {
+        val size_one_adapter: ArrayAdapter<String>? = context?.let {
             ArrayAdapter(
                 it,
-                android.R.layout.simple_spinner_item, spinnerList
+                android.R.layout.simple_spinner_item, size_one_list
             )
         }
-        appCompatSpinner.adapter = adapter
-        appCompatSpinner2.adapter = adapter
+        val size_two_adapter: ArrayAdapter<String>? = context?.let {
+            ArrayAdapter(
+                it,
+                android.R.layout.simple_spinner_item, size_two_list
+            )
+        }
+        size_one_spinner.adapter = size_one_adapter
+        size_two_spinner.adapter = size_two_adapter
     }
 }

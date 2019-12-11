@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         val stringList = ArrayList<String>()
 
         for (x in 0..10) {
-            stringList.add("One")
+            stringList.add("x = $x")
         }
 
         main_recyclerview.adapter = MainListAdapter(stringList)

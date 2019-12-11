@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="-446dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
+        android:id="@+id/dialog_title"
         android:layout_width="0dp"
         android:layout_height="@dimen/filter_title_height"
         android:background="@color/colorPrimary"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView2"
+        android:id="@+id/size_one"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
@@ -31,20 +31,20 @@
         android:text="@string/size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/appCompatSpinner"
+        android:id="@+id/size_one_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
         android:layout_marginEnd="@dimen/filter_dialog_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/size_one" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView3"
+        android:id="@+id/size_two"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
@@ -52,20 +52,20 @@
         android:text="@string/size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/size_one_spinner" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/appCompatSpinner2"
+        android:id="@+id/size_two_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
         android:layout_marginEnd="@dimen/filter_dialog_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+        app:layout_constraintTop_toBottomOf="@+id/size_two" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView4"
+        android:id="@+id/price_range"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
@@ -73,17 +73,17 @@
         android:text="@string/price_range"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatSpinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/size_two_spinner" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/appCompatSeekBar"
+        android:id="@+id/price_range_seekbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/filter_dialog_padding"
         android:layout_marginEnd="@dimen/filter_dialog_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
+        app:layout_constraintTop_toBottomOf="@+id/price_range" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_reset"
@@ -94,7 +94,7 @@
         android:text="@string/reset"
         android:textColor="@color/colorBlue"
         app:layout_constraintEnd_toStartOf="@+id/bt_filter"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatSeekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_filter"
@@ -104,6 +104,6 @@
         android:text="@string/filter"
         android:textColor="@color/colorBlue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatSeekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
