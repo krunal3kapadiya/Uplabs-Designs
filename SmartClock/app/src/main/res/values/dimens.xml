@@ -4,4 +4,5 @@
     <dimen name="floating_button_margin">16dp</dimen>
     <dimen name="floating_button_padding">16dp</dimen>
     <dimen name="recycler_view_margin">16dp</dimen>
+    <dimen name="text_time_size">18sp</dimen>
 </resources>

@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     tools:context="app.krunal3kapadiya.smartclock.ui.clock.ClockFragment">
 
-    <app.krunal3kapadiya.smartclock.widget.AnalogClockView
+    <app.krunal3kapadiya.smartclock.ui.widget.AnalogClockView
         android:id="@+id/alarm_clock"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -21,8 +21,8 @@
         android:id="@+id/recycler_view_different_clocks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/recycler_view_margin"
+        android:layout_marginEnd="@dimen/recycler_view_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/floating_button_margin"
         android:saveEnabled="false"
         android:src="@drawable/ic_add_white_24dp"
         app:layout_constraintBottom_toBottomOf="parent"

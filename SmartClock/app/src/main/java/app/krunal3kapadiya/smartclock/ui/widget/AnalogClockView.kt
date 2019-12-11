@@ -1,4 +1,4 @@
-package app.krunal3kapadiya.smartclock.widget
+package app.krunal3kapadiya.smartclock.ui.widget
 
 
 import android.content.Context
@@ -11,8 +11,12 @@ import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
+/**
+ * created custom clockview as per the design
+ */
 
 class AnalogClockView : View {
+
     private var padding = 0
     private val numeralSpacing = 0
     private var handTruncation = 0
@@ -23,17 +27,14 @@ class AnalogClockView : View {
     var view_height = 0
     var view_width = 0
 
-    constructor(context: Context?) : super(context) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(
-        context,
-        attrs
-    )
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
-    constructor(
-        context: Context?,
-        attrs: AttributeSet?,
-        defStyleAttr: Int
-    ) : super(context, attrs, defStyleAttr)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     private fun initClock() {
         this.view_height = height

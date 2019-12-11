@@ -35,6 +35,5 @@ class StopWatchFragment : Fragment() {
             // TODO start timer here
             floatingActionButton.isActivated = !floatingActionButton.isActivated
         }
-
     }
 }
