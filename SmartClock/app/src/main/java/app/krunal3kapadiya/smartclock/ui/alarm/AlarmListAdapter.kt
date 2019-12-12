@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.krunal3kapadiya.smartclock.R
+import app.krunal3kapadiya.smartclock.data.Alarm
+import kotlinx.android.synthetic.main.row_alarm_list.view.*
 
-class AlarmListAdapter(private val list: List<String>) :
+class AlarmListAdapter(private val alarmList: List<Alarm>) :
     RecyclerView.Adapter<AlarmListAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(s: String) {
-
+        fun bind(alarm: Alarm) {
+            itemView.text_alarm_time.text = alarm.alarmTime
+            itemView.alarm_activated_switch.isActivated= alarm.isActivated
         }
     }
 
@@ -25,11 +28,11 @@ class AlarmListAdapter(private val list: List<String>) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return alarmList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(alarmList[position])
     }
 
 }

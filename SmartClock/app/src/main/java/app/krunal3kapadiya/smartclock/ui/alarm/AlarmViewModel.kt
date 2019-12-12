@@ -9,5 +9,7 @@ import androidx.lifecycle.ViewModel
  */
 
 class AlarmViewModel : ViewModel() {
+    fun insertAlarm() {
 
+    }
 }

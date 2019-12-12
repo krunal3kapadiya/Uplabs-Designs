@@ -4,13 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import app.krunal3kapadiya.smartclock.R
+import app.krunal3kapadiya.smartclock.base.BaseActivity
 import app.krunal3kapadiya.smartclock.ui.alarm.AlarmFragment
 import app.krunal3kapadiya.smartclock.ui.clock.ClockFragment
 import app.krunal3kapadiya.smartclock.ui.stopwatch.StopWatchFragment
@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
