@@ -4,10 +4,14 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.content.Context
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,11 +36,19 @@ class AlarmFragment : Fragment() {
         }
     }
 
+    val RQS_1 = 1
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        SmartClockApplication.appComponent?.inject(this)
+
+//        DaggerAppComponent.builder()
+//            .application(activity?.application)
+//            ?.build()?.inject(this)
         return inflater.inflate(R.layout.fragment_alarm, container, false)
     }
 
@@ -79,7 +91,28 @@ class AlarmFragment : Fragment() {
                     alarmList.add(
                         alarm
                     )
-//                    dbHelper.insertAlarm(alarm = alarm)
+
+
+                    val calNow = Calendar.getInstance()
+                    val calSet = calNow.clone() as Calendar
+
+                    calSet[Calendar.HOUR_OF_DAY] = hourOfDay
+                    calSet[Calendar.MINUTE] = minute
+                    calSet[Calendar.SECOND] = 0
+                    calSet[Calendar.MILLISECOND] = 0
+
+                    if (calSet.compareTo(calNow) <= 0) { //Today Set time passed, count to tomorrow
+                        calSet.add(Calendar.DATE, 1)
+                    }
+
+                    //Adding alarm
+                    val intent = Intent(context, MyAlarmReciever::class.java)
+                    val pendingIntent =
+                        PendingIntent.getBroadcast(context, RQS_1, intent, 0)
+                    val alarmManager = context!!.getSystemService(ALARM_SERVICE) as AlarmManager
+                    alarmManager[AlarmManager.RTC_WAKEUP, calSet.timeInMillis] =
+                        pendingIntent
+
                     alarmListAdapter.notifyDataSetChanged()
                 },
                 mHour,

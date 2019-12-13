@@ -16,12 +16,14 @@ import app.krunal3kapadiya.smartclock.ui.clock.ClockFragment
 import app.krunal3kapadiya.smartclock.ui.stopwatch.StopWatchFragment
 import app.krunal3kapadiya.smartclock.ui.timer.TimerFragment
 import com.google.android.material.tabs.TabLayout
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -31,6 +33,7 @@ class MainActivity : BaseActivity() {
             )
         }
         setContentView(R.layout.activity_main)
+        AndroidInjection.inject(this)
 
         val adapter =
             TabViewPager(

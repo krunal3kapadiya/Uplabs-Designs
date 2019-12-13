@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import app.krunal3kapadiya.smartclock.R
 import kotlinx.android.synthetic.main.fragment_stopwatch.*
+import java.util.concurrent.TimeUnit
+import kotlin.time.ExperimentalTime
 
 
 /**
@@ -24,7 +26,6 @@ class StopWatchFragment : Fragment() {
     companion object {
         val BROADCAST_ACTION: String? = "app.krunal3kapadiya.smartclock.ui.BROADCAST"
         val EXTENDED_DATA_STATUS: String? = "app.krunal3kapadiya.smartclock.ui.BROADCAST"
-
 
         fun newInstance(): StopWatchFragment {
             return StopWatchFragment()
@@ -39,11 +40,12 @@ class StopWatchFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_stopwatch, container, false)
     }
 
+    @ExperimentalTime
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val intent = Intent(context, StopWatchService("service")::class.java)
-        var i = 0
+        val intent = Intent(context, StopWatchService::class.java)
+        var i = 0L
         add_alarm_button.setOnClickListener {
             // TODO start timer here
             if (add_alarm_button.isActivated) {
@@ -54,16 +56,30 @@ class StopWatchFragment : Fragment() {
             add_alarm_button.isActivated = !add_alarm_button.isActivated
         }
 
-
         activity?.applicationContext?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(
                 object : BroadcastReceiver() {
                     override fun onReceive(context: Context, intent: Intent) {
-                        i = intent.getIntExtra(EXTENDED_DATA_STATUS, 0)
-                        alarm_clock.text = "$i"
+                        i = intent.getLongExtra(EXTENDED_DATA_STATUS, 0)
+                        alarm_clock.text = getFormattedNumbers(i)
                     }
                 }, IntentFilter(BROADCAST_ACTION)
             )
         }
+
+        text_reset.setOnClickListener {
+            i = 0
+            alarm_clock.text = getString(R.string._00_00_00)
+        }
+    }
+
+    fun getFormattedNumbers(number: Long): String {
+        // long hours = (milliseconds / 1000) / 60 / 60;
+        val hours = TimeUnit.MILLISECONDS.toHours(number)
+        // long minutes = (milliseconds / 1000) / 60;
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(number)
+        // long seconds = (milliseconds / 1000);
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(number)
+        return "$hours: $minutes : $seconds"
     }
 }

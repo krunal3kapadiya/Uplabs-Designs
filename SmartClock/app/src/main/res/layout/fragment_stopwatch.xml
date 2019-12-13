@@ -16,11 +16,24 @@
         android:gravity="center"
         android:text="@string/_00_00_00"
         android:textColor="@android:color/white"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/add_alarm_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/_00_00_00" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/reset"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/add_alarm_button"
+        app:layout_constraintEnd_toStartOf="@+id/add_alarm_button" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/add_alarm_button"

@@ -33,6 +33,9 @@
         <service
             android:name=".ui.stopwatch.StopWatchService"
             android:exported="false" />
+        <service
+            android:name=".ui.alarm.AlarmService"
+            android:exported="false" />
     </application>
 
 </manifest>
