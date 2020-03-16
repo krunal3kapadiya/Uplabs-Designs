@@ -1,29 +1,32 @@
 package app.krunal3kapadiya.smartclock.ui.stopwatch
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Binder
-import android.os.Build
-import android.os.IBinder
+import android.os.*
 import android.util.Log
-import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import app.krunal3kapadiya.smartclock.R
 import app.krunal3kapadiya.smartclock.ui.MainActivity
+import app.krunal3kapadiya.smartclock.ui.stopwatch.StopWatchFragment.Companion.getFormattedNumbers
+import java.lang.ref.WeakReference
 
 class StopWatchService : Service() {
     // Start and end times in milliseconds
     private var startTime: Long = 0
     private var endTime: Long = 0
+    var isRunningInForeground = false
+    lateinit var notificationManager: NotificationManagerCompat
+    lateinit var notification: Notification
+
     /**
      * @return whether the timer is running
      */
     // Is the service tracking time?
     var isTimerRunning = false
-        private set
+
     // Service binder
     private val serviceBinder: IBinder = RunServiceBinder()
 
@@ -33,33 +36,35 @@ class StopWatchService : Service() {
     }
 
     override fun onCreate() {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "Creating service")
-        }
+
+        Log.d(TAG, "Creating service")
+
         startTime = 0
         endTime = 0
         isTimerRunning = false
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "Starting service")
+        if (intent?.action == ARG_STOP_SERVICE) {
+            stopForeground()
         }
+
+        Log.d(TAG, "Starting service")
+
         return START_STICKY
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "Binding service")
+    private fun stopForeground() {
+        if (isRunningInForeground) {
+            notificationManager.cancel(NOTIFICATION_ID)
+            isRunningInForeground = false
         }
-        return serviceBinder
+        stopForeground(true)
+        stopSelf()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "Destroying service")
-        }
+    override fun onBind(intent: Intent): IBinder? {
+        return serviceBinder
     }
 
     /**
@@ -73,8 +78,7 @@ class StopWatchService : Service() {
                 endTime
             }
             val time = startTime / 1000
-            Log.d("TimerS", "$time")
-
+            Log.d(TAG, "$time")
             isTimerRunning = true
         } else {
             Log.e(
@@ -106,23 +110,45 @@ class StopWatchService : Service() {
      */
     fun elapsedTime(): Long { // If the timer is running, the end time will be zero
         val b = endTime > startTime
-        Log.d("TimerS", "$b")
-        return if (endTime > startTime) endTime - startTime else System.currentTimeMillis() - startTime
+        Log.d(TAG, "elapsedTime Time = $b")
+        val time =
+            if (endTime > startTime) endTime - startTime else System.currentTimeMillis() - startTime
+        if (isRunningInForeground) {
+            notification = getNotificationBuilder()!!.setContentText(getFormattedNumbers(time)).build()
+            notificationManager.notify(
+                NOTIFICATION_ID,
+                notification
+            )
+        }
+        return time
     }
 
     /**
      * Place the service into the foreground
      */
     fun foreground() {
-        startForeground(NOTIFICATION_ID, createNotification())
+        Log.d(TAG, "Starting service in foreground")
+        isRunningInForeground = true
+        notification = createNotification()
+        startForeground(NOTIFICATION_ID, notification)
     }
 
     /**
      * Return the service to the background
      */
     fun background() {
+        isRunningInForeground = false
         stopForeground(true)
     }
+
+    /**
+     * resetting clock
+     */
+    fun reset() {
+        startTime = 0
+        isTimerRunning = false
+    }
+
 
     /**
      * Creates a notification for placing the service into the foreground
@@ -130,36 +156,37 @@ class StopWatchService : Service() {
      * @return a notification for interacting with the service when in the foreground
      */
     private fun createNotification(): Notification {
-        val channelId: String
-        channelId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel("my_service", "My Background Service")
-        } else { // If earlier version channel ID is not used
-            // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
-            ""
-        }
-        val remoteViews = RemoteViews(packageName, R.layout.row_notification)
-        remoteViews.setImageViewResource(R.id.app_icon, R.mipmap.ic_launcher)
-        remoteViews.setTextViewText(R.id.notification_title, getString(R.string.app_name))
-        remoteViews.setTextViewText(
-            R.id.notification_sub_title,
-            "Notification Custom Title"
-        )
-//        val builder = NotificationCompat.Builder(this, channelId)
-//            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-//            .setCustomContentView(remoteViews)
-//            .setSmallIcon(R.mipmap.ic_launcher)
 
-        val builder = NotificationCompat.Builder(this, channelId)
-            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-//            .setCustomContentView(remoteViews)
-            .setSmallIcon(R.mipmap.ic_launcher)
-        val resultIntent = Intent(this, MainActivity::class.java)
-        val resultPendingIntent = PendingIntent.getActivity(
-            this, 0, resultIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+        return getNotificationBuilder()?.build()!!
+    }
+
+    private fun getNotificationBuilder(): NotificationCompat.Builder? {
+        val channelId: String = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                createNotificationChannel("my_service", "My Background Service")
+            }
+            else -> {
+                ""
+            }
+        }
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0,
+            notificationIntent, 0
         )
-        builder.setContentIntent(resultPendingIntent)
-        return builder.build()
+
+        val stopIntent = Intent(this, StopWatchService::class.java)
+        stopIntent.action = ARG_STOP_SERVICE
+        val closeServicePendingIntent = PendingIntent.getService(
+            this, 0,
+            stopIntent, 0
+        )
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_tab_stop_watch)
+            .setOngoing(false)
+            .setContentIntent(pendingIntent)
+            .addAction(R.drawable.ic_stop_white_24dp, "PAUSE", closeServicePendingIntent)
+        return builder
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -173,15 +200,36 @@ class StopWatchService : Service() {
         )
         chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-        val service =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        service.createNotificationChannel(chan)
+        notificationManager =
+            NotificationManagerCompat.from(this)
+        notificationManager.createNotificationChannel(chan)
         return channelId
     }
 
     companion object {
         private val TAG = StopWatchService::class.java.simpleName
+
         // Foreground notification id
-        private const val NOTIFICATION_ID = 1
+        private const val NOTIFICATION_ID = 101
+        private const val ARG_STOP_SERVICE = "STOP_SERVICE"
+    }
+
+    internal class UIUpdateHandler(activity: StopWatchFragment) : Handler() {
+        private val activity: WeakReference<StopWatchFragment> = WeakReference(activity)
+        override fun handleMessage(message: Message) {
+            if (StopWatchFragment.MSG_UPDATE_TIME == message.what) {
+                Log.d(TAG, "updating time")
+                activity.get()!!.updateUITimer()
+                sendEmptyMessageDelayed(
+                    StopWatchFragment.MSG_UPDATE_TIME,
+                    UPDATE_RATE_MS.toLong()
+                )
+            }
+        }
+
+        companion object {
+            private const val UPDATE_RATE_MS = 1000
+        }
+
     }
 }

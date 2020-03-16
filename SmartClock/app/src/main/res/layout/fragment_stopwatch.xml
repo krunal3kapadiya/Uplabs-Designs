@@ -18,7 +18,7 @@
         android:text="@string/_00_00_00"
         android:textColor="@android:color/white"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/add_alarm_button"
+        app:layout_constraintBottom_toTopOf="@+id/start_stop_stopwatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,11 +33,11 @@
         android:layout_marginBottom="15dp"
         android:text="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/add_alarm_button"
-        app:layout_constraintEnd_toStartOf="@+id/add_alarm_button" />
+        app:layout_constraintBottom_toBottomOf="@+id/start_stop_stopwatch"
+        app:layout_constraintEnd_toStartOf="@+id/start_stop_stopwatch" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/add_alarm_button"
+        android:id="@+id/start_stop_stopwatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/floating_button_margin"
