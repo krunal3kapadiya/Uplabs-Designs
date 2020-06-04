@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Smart Clock</string>
+    <string name="_00_00_00">00: 00: 00</string>
+    <string name="_7_30_am">7:30 AM</string>
+    <string name="daily">Daily</string>
+    <string name="new_delhi">New Delhi</string>
+    <string name="today">Today</string>
+    <string name="_09_05_pm">09:05 PM</string>
+    <string name="reset">Reset</string>
+</resources>

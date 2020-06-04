@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    tools:context="app.krunal3kapadiya.smartclock.ui.clock.ClockListAdapter">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_alarm_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/new_delhi"
+        android:textSize="@dimen/text_time_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text_alarm_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_alarm_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="@string/today"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_alarm_time" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/alarm_activated_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="@string/_09_05_pm"
+        app:layout_constraintBottom_toBottomOf="@+id/text_alarm_time"
+        app:layout_constraintEnd_toEndOf="@+id/text_alarm_time"
+        app:layout_constraintTop_toBottomOf="@+id/text_alarm_time" />
+</androidx.constraintlayout.widget.ConstraintLayout>

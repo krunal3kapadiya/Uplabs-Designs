@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="app.krunal3kapadiya.smartclock.ui.stopwatch.StopWatchFragment">
+
+
+    <Chronometer
+        android:id="@+id/alarm_clock"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:background="@drawable/ic_round_drawable"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:text="@string/_00_00_00"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/start_stop_stopwatch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/_00_00_00" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/reset"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/start_stop_stopwatch"
+        app:layout_constraintEnd_toStartOf="@+id/start_stop_stopwatch" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/start_stop_stopwatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/floating_button_margin"
+        android:background="@drawable/ic_round_drawable"
+        android:padding="@dimen/floating_button_padding"
+        android:saveEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_smart_stopwatch" />
+</androidx.constraintlayout.widget.ConstraintLayout>
